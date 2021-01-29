@@ -2,11 +2,11 @@ import React from "react";
 import "./App.css";
 import Header from "./components/Header";
 import Nav from "./components/Nav";
+import TeamPage from "./pages/TeamPage";
 
 function App() {
   return (
     <div>
-      {/* <Nav /> */}
       <Header />
       <div class="py-12 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -98,6 +98,7 @@ function App() {
           </div>
         </div>
       </div>
+      <TeamPage />
     </div>
   );
 }
