@@ -9,10 +9,10 @@ function App() {
   return (
     <div>
       <Nav />
-
-      <Home />
-
-      {/* <TeamPage /> */}
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/teampage" component={TeamPage} />
+      </Switch>
     </div>
   );
 }
