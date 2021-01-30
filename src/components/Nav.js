@@ -10,10 +10,7 @@ const Nav = () => {
           <div class="flex items-center justify-between w-full md:w-auto">
             <a href="#">
               <span class="sr-only">Workflow</span>
-              <img
-                class="h-8 w-auto sm:h-10"
-                src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-              />
+              <img class="h-8 w-auto sm:h-10" src="icons8-stadium-100.png" />
             </a>
             <div class="-mr-2 flex items-center md:hidden">
               <button
@@ -43,19 +40,18 @@ const Nav = () => {
         </div>
         <div class="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
           <a href="#" class="font-medium text-gray-500 hover:text-gray-900">
-            Product
+            Teams
           </a>
 
           <a href="#" class="font-medium text-gray-500 hover:text-gray-900">
-            Features
+            Coaches
+          </a>
+          <a href="#" class="font-medium text-gray-500 hover:text-gray-900">
+            Players
           </a>
 
           <a href="#" class="font-medium text-gray-500 hover:text-gray-900">
-            Marketplace
-          </a>
-
-          <a href="#" class="font-medium text-gray-500 hover:text-gray-900">
-            Company
+            Stadiums
           </a>
 
           <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
