@@ -61,12 +61,20 @@ const TeamPage = () => {
       {teams.map((team) => {
         if (team.school == teamName) {
           return (
-            <div class="min-h-0 flex flex-col items-center justify-center bg-gray-50 py-4 px-4 sm:px-6 lg:px-8">
-              <img src={team.logos[0]} style={{ height: "200px" }} />
-              <p>
-                {team.school} {team.mascot}
-              </p>
-              <p>{team.conference}</p>
+            <div class="min-h-0 flex flex-row items-center justify-center bg-gray-50 py-4 px-4 sm:px-6 lg:px-8">
+              <div>
+                <img src={team.logos[0]} style={{ height: "200px" }} />
+              </div>
+              <div>
+                <p class="text-2xl font-light">
+                  <span class="font-extrabold">{team.school}</span>
+                  {team.mascot}
+                </p>
+                <p class="text-xl font-thin">
+                  <span class="font-bold">{team.conference}</span> (
+                  {team.division})
+                </p>
+              </div>
             </div>
           );
         }
