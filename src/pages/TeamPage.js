@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import Season from "../components/Season";
+import Game from "../components/Game";
 
 const TeamPage = () => {
   const [teams, setTeams] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [teamName, setTeamName] = useState(null);
   const [error, setError] = useState(null);
-  const [formData, setFormData] = React.useState({
+  const [formData, setFormData] = useState({
     search: "",
   });
 
@@ -79,6 +79,7 @@ const TeamPage = () => {
           );
         }
       })}
+      <Game team={teamName} />
     </div>
   );
 };
