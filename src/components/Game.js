@@ -111,20 +111,26 @@ export const Game = (props) => {
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                           <div class="text-sm text-gray-900">
-                            {game.home_team} vs. {game.away_team}
+                            {team === game.home_team
+                              ? `vs. ${game.away_team}`
+                              : `at ${game.home_team}`}
                           </div>
-                          <div class="text-sm text-gray-500">
-                            {" "}
-                            {game.venue}{" "}
-                          </div>
+                          <div class="text-sm text-gray-500">{game.venue}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                           <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                            W
+                            {(team === game.home_team &&
+                              game.home_points > game.away_points) ||
+                            (team === game.away_team &&
+                              game.away_points > game.home_points)
+                              ? "W"
+                              : "L"}
                           </span>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          {game.home_points} - {game.away_points}
+                          {team === game.home_team
+                            ? `${game.home_points} -  ${game.away_points}`
+                            : `${game.away_points} -  ${game.home_points}`}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           Box
