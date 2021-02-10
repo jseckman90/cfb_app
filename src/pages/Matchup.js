@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 export const Matchup = () => {
-  const [team1, setTeam1] = useState("Alabama");
-  const [team2, setTeam2] = useState("Auburn");
+  const [team1, setTeam1] = useState("");
+  const [team2, setTeam2] = useState("");
   const [formData, setFormData] = useState({
     firstTeam: "",
     secondTeam: "",
@@ -21,8 +21,6 @@ export const Matchup = () => {
 
   useEffect(() => {
     const getMatchups = async () => {
-      console.log(team1);
-      console.log(team2);
       const response = await fetch(
         `https://api.collegefootballdata.com/teams/matchup?team1=${team1}&team2=${team2}`
       );
@@ -33,9 +31,28 @@ export const Matchup = () => {
     getMatchups();
   }, [team1, team2]);
 
+  const loaded = () => {
+    return (
+      <div>
+        {matchups.games.map((game) => {
+          return (
+            <>
+              <p>{game.season}</p>
+              <p>
+                {game.homeTeam} - {game.homeScore}
+              </p>
+              <p>
+                {game.awayTeam} - {game.awayScore}
+              </p>
+            </>
+          );
+        })}
+      </div>
+    );
+  };
+
   return (
     <div>
-      <h1>Game Page</h1>
       <div className="min-h-0 flex items-start justify-center bg-gray-50 py-4 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
@@ -72,8 +89,13 @@ export const Matchup = () => {
         </div>
       </div>
       <div className="flex flex-col">
-        {matchups.team1} {matchups.team1Wins} - {matchups.team2Wins}{" "}
-        {matchups.team2}
+        <h1>OVERALL SERIES</h1>
+        <h2>
+          {matchups.team1} {matchups.team1Wins} - {matchups.team2Wins}{" "}
+          {matchups.team2}
+        </h2>
+        <br />
+        {matchups.team1 && matchups.team2 ? loaded() : <p>Choose teams</p>}
       </div>
     </div>
   );
