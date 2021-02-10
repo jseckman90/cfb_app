@@ -51,12 +51,12 @@ const Nav = () => {
           </Link>
 
           <Link
-            href="Coaches"
+            to="Coaches"
             className="font-medium text-gray-500 hover:text-gray-900">
             Coaches
           </Link>
           <Link
-            href="/players"
+            to="/players"
             className="font-medium text-gray-500 hover:text-gray-900">
             Players
           </Link>

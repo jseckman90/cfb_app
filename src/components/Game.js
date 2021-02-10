@@ -9,14 +9,6 @@ export const Game = (props) => {
     year: "",
   });
 
-  const getGames = async () => {
-    const response = await fetch(
-      `https://api.collegefootballdata.com/games?year=${year}&seasonType=regular&team=${team}`
-    );
-    const data = await response.json();
-    setGameInfo(data);
-  };
-
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
@@ -24,12 +16,18 @@ export const Game = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setYear(formData.year);
-    getGames();
   };
 
   useEffect(() => {
+    const getGames = async () => {
+      const response = await fetch(
+        `https://api.collegefootballdata.com/games?year=${year}&seasonType=regular&team=${team}`
+      );
+      const data = await response.json();
+      setGameInfo(data);
+    };
     getGames();
-  }, [year]);
+  }, [team, year]);
 
   return (
     <div>

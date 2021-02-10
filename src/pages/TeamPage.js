@@ -19,10 +19,13 @@ const TeamPage = () => {
     console.log(teamName);
   };
 
-  useEffect(async () => {
-    const response = await fetch(`https://api.collegefootballdata.com/teams`);
-    const data = await response.json();
-    setTeams(data);
+  useEffect(() => {
+    const getTeams = async () => {
+      const response = await fetch(`https://api.collegefootballdata.com/teams`);
+      const data = await response.json();
+      setTeams(data);
+    };
+    getTeams();
   }, [teams]);
 
   return (
@@ -39,7 +42,6 @@ const TeamPage = () => {
                   onChange={handleChange}
                   placeholder="Search Teams"
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  placeholder="Search Teams"
                 />
               </div>
             </div>
@@ -57,11 +59,15 @@ const TeamPage = () => {
       </div>
 
       {teams.map((team) => {
-        if (team.school == teamName) {
+        if (team.school === teamName) {
           return (
             <div className="min-h-0 flex flex-row items-center justify-center bg-gray-50 py-4 px-4 sm:px-6 lg:px-8">
               <div>
-                <img src={team.logos[0]} style={{ height: "200px" }} />
+                <img
+                  src={team.logos[0]}
+                  style={{ height: "200px" }}
+                  alt="team-logo"
+                />
               </div>
               <div>
                 <p className="text-2xl font-light">
@@ -75,6 +81,8 @@ const TeamPage = () => {
               </div>
             </div>
           );
+        } else {
+          return <h3>No info Available</h3>;
         }
       })}
       <Game team={teamName} />

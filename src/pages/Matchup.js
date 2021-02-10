@@ -9,17 +9,6 @@ export const Matchup = () => {
   });
   const [matchups, setMatchups] = useState([]);
 
-  const getMatchups = async () => {
-    console.log(team1);
-    console.log(team2);
-    const response = await fetch(
-      `https://api.collegefootballdata.com/teams/matchup?team1=${team1}&team2=${team2}`
-    );
-    const data = await response.json();
-    console.log(data);
-    setMatchups(data);
-  };
-
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
@@ -28,13 +17,21 @@ export const Matchup = () => {
     event.preventDefault();
     setTeam1(formData.firstTeam);
     setTeam2(formData.secondTeam);
-
-    getMatchups();
   };
 
   useEffect(() => {
+    const getMatchups = async () => {
+      console.log(team1);
+      console.log(team2);
+      const response = await fetch(
+        `https://api.collegefootballdata.com/teams/matchup?team1=${team1}&team2=${team2}`
+      );
+      const data = await response.json();
+      console.log(data);
+      setMatchups(data);
+    };
     getMatchups();
-  }, []);
+  }, [team1, team2]);
 
   return (
     <div>
@@ -75,19 +72,8 @@ export const Matchup = () => {
         </div>
       </div>
       <div className="flex flex-col">
-        {matchups.games.map((game) => {
-          return (
-            <>
-              <p>{game.season}</p>
-              <p>
-                {game.awayTeam} - {game.awayScore}
-              </p>
-              <p>
-                {game.homeTeam} - {game.homeScore}
-              </p>
-            </>
-          );
-        })}
+        {matchups.team1} {matchups.team1Wins} - {matchups.team2Wins}{" "}
+        {matchups.team2}
       </div>
     </div>
   );
