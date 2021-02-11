@@ -61,6 +61,18 @@ export const Matchup = () => {
                   <img src={team1Logo} className="h-32" />
                 </div>
               </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <div className="flex items-center justify-center">
+                  {(game.homeTeam === team1 &&
+                    game.homeScore > game.awayScore) ||
+                  (game.homeTeam === team2 &&
+                    game.awayScore > game.homeScore) ? (
+                    <img src="icons8-sport-50.png" className="h-8" />
+                  ) : (
+                    <p></p>
+                  )}
+                </div>
+              </td>
 
               <td className="flex-col px-6 py-4 whitespace-nowrap justify-center">
                 <div className="flex text-sm text-gray-500 justify-center">
@@ -69,6 +81,18 @@ export const Matchup = () => {
                 <div className=" flex px-2  text-xs font-semibold rounded-full bg-gray-100  text-2xl justify-center">
                   {game.homeTeam === team1 ? game.homeScore : game.awayScore} -{" "}
                   {game.awayTeam === team2 ? game.awayScore : game.homeScore}
+                </div>
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <div className="flex items-center justify-center">
+                  {(game.homeTeam === team2 &&
+                    game.homeScore > game.awayScore) ||
+                  (game.homeTeam === team1 &&
+                    game.awayScore > game.homeScore) ? (
+                    <img src="icons8-sport-50.png" className="h-8" />
+                  ) : (
+                    <p></p>
+                  )}
                 </div>
               </td>
 
@@ -132,8 +156,8 @@ export const Matchup = () => {
           </h2>
           <br />
         </div>
-        <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8 mx-8">
+        <div className="flex justify-center -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div className="py-2 align-middle inline-block min-w-max sm:px-6 lg:px-8 mx-8">
             <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
@@ -151,6 +175,10 @@ export const Matchup = () => {
                       style={{ textAlign: "center" }}>
                       Score
                     </th>
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      style={{ textAlign: "center" }}></th>
                     <th
                       scope="col"
                       className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
