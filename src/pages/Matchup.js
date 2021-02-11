@@ -57,30 +57,24 @@ export const Matchup = () => {
           return (
             <tr>
               <td className="px-6 py-4 whitespace-nowrap">
-                <div className="flex items-center">
-                  <div className="ml-4">
-                    <div className="text-sm font-medium text-gray-900 text-xl">
-                      <img src={team1Logo} className="h-32" />
-                    </div>
-                  </div>
+                <div className="flex items-center justify-center">
+                  <img src={team1Logo} className="h-32" />
+                </div>
+              </td>
+
+              <td className="flex-col px-6 py-4 whitespace-nowrap justify-center">
+                <div className="flex text-sm text-gray-500 justify-center">
+                  {game.season}
+                </div>
+                <div className=" flex px-2  text-xs font-semibold rounded-full bg-gray-100  text-2xl justify-center">
+                  {game.homeTeam === team1 ? game.homeScore : game.awayScore} -{" "}
+                  {game.awayTeam === team2 ? game.awayScore : game.homeScore}
                 </div>
               </td>
 
               <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm text-gray-500">{game.season}</div>
-                <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 text-2xl">
-                  {game.homeTeam === team1 ? game.homeScore : game.awayScore} -{" "}
-                  {game.awayTeam === team2 ? game.awayScore : game.homeScore}
-                </span>
-              </td>
-
-              <td className="px-6 py-4 whitespace-nowrap">
-                <div className="flex items-center">
-                  <div className="ml-4">
-                    <div className="text-sm font-medium text-gray-900 text-xl">
-                      <img src={team2Logo} className="h-32" />
-                    </div>
-                  </div>
+                <div className="flex items-center justify-center">
+                  <img src={team2Logo} className="h-32" />
                 </div>
               </td>
             </tr>
@@ -129,33 +123,38 @@ export const Matchup = () => {
       </div>
       <div className="flex flex-col">
         <div className="flex flex-col">
-          <h1>OVERALL SERIES</h1>
-          <h2>
+          <h1 className="text-4xl" style={{ textAlign: "center" }}>
+            OVERALL SERIES
+          </h1>
+          <h2 className="text-3xl" style={{ textAlign: "center" }}>
             {matchups.team1} {matchups.team1Wins} - {matchups.team2Wins}{" "}
             {matchups.team2}
           </h2>
           <br />
         </div>
         <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+          <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8 mx-8">
             <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
                     <th
                       scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      style={{ textAlign: "center" }}>
                       Team 1
                     </th>
 
                     <th
                       scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      style={{ textAlign: "center" }}>
                       Score
                     </th>
                     <th
                       scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      style={{ textAlign: "center" }}>
                       team 2
                     </th>
                   </tr>
