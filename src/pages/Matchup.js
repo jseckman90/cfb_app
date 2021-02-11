@@ -33,21 +33,41 @@ export const Matchup = () => {
 
   const loaded = () => {
     return (
-      <div>
+      <>
         {matchups.games.map((game) => {
           return (
-            <>
-              <p>{game.season}</p>
-              <p>
-                {game.homeTeam} - {game.homeScore}
-              </p>
-              <p>
-                {game.awayTeam} - {game.awayScore}
-              </p>
-            </>
+            <tr>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <div className="flex items-center">
+                  <div className="ml-4">
+                    <div className="text-sm font-medium text-gray-900">
+                      {game.homeTeam === team1 ? game.homeTeam : game.awayTeam}
+                    </div>
+                  </div>
+                </div>
+              </td>
+
+              <td className="px-6 py-4 whitespace-nowrap">
+                <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                  {game.homeTeam === team1 ? game.homeScore : game.awayScore} -{" "}
+                  {game.awayTeam === team2 ? game.awayScore : game.homeScore}
+                </span>
+                <div className="text-sm text-gray-500">{game.season}</div>
+              </td>
+
+              <td className="px-6 py-4 whitespace-nowrap">
+                <div className="flex items-center">
+                  <div className="ml-4">
+                    <div className="text-sm font-medium text-gray-900">
+                      {game.awayTeam === team2 ? game.awayTeam : game.homeTeam}
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
           );
         })}
-      </div>
+      </>
     );
   };
 
@@ -89,13 +109,49 @@ export const Matchup = () => {
         </div>
       </div>
       <div className="flex flex-col">
-        <h1>OVERALL SERIES</h1>
-        <h2>
-          {matchups.team1} {matchups.team1Wins} - {matchups.team2Wins}{" "}
-          {matchups.team2}
-        </h2>
-        <br />
-        {matchups.team1 && matchups.team2 ? loaded() : <p>Choose teams</p>}
+        <div className="flex flex-col">
+          <h1>OVERALL SERIES</h1>
+          <h2>
+            {matchups.team1} {matchups.team1Wins} - {matchups.team2Wins}{" "}
+            {matchups.team2}
+          </h2>
+          <br />
+        </div>
+        <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+            <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Team 1
+                    </th>
+
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Score
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      team 2
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {matchups.team1 && matchups.team2 ? (
+                    loaded()
+                  ) : (
+                    <p>Choose teams</p>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
