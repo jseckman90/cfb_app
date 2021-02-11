@@ -7,6 +7,8 @@ export const Matchup = () => {
     firstTeam: "",
     secondTeam: "",
   });
+  const [team1Logo, setTeam1Logo] = useState("");
+  const [team2Logo, setTeam2Logo] = useState("");
   const [matchups, setMatchups] = useState([]);
 
   const handleChange = (event) => {
@@ -25,10 +27,27 @@ export const Matchup = () => {
         `https://api.collegefootballdata.com/teams/matchup?team1=${team1}&team2=${team2}`
       );
       const data = await response.json();
-      console.log(data);
       setMatchups(data);
     };
     getMatchups();
+
+    const getLogos = async () => {
+      const response = await fetch("https://api.collegefootballdata.com/teams");
+      const data = await response.json();
+      console.log(data);
+      data.map((team) => {
+        if (team.school === team1) {
+          setTeam1Logo(team.logos[0]);
+        } else if (team.school === team2) {
+          setTeam2Logo(team.logos[0]);
+        } else {
+          <p>No Logo Available for {team.school}</p>;
+        }
+      });
+      console.log(team1Logo);
+      console.log(team2Logo);
+    };
+    getLogos();
   }, [team1, team2]);
 
   const loaded = () => {
@@ -40,26 +59,26 @@ export const Matchup = () => {
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="flex items-center">
                   <div className="ml-4">
-                    <div className="text-sm font-medium text-gray-900">
-                      {game.homeTeam === team1 ? game.homeTeam : game.awayTeam}
+                    <div className="text-sm font-medium text-gray-900 text-xl">
+                      <img src={team1Logo} className="h-32" />
                     </div>
                   </div>
                 </div>
               </td>
 
               <td className="px-6 py-4 whitespace-nowrap">
-                <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                <div className="text-sm text-gray-500">{game.season}</div>
+                <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 text-2xl">
                   {game.homeTeam === team1 ? game.homeScore : game.awayScore} -{" "}
                   {game.awayTeam === team2 ? game.awayScore : game.homeScore}
                 </span>
-                <div className="text-sm text-gray-500">{game.season}</div>
               </td>
 
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="flex items-center">
                   <div className="ml-4">
-                    <div className="text-sm font-medium text-gray-900">
-                      {game.awayTeam === team2 ? game.awayTeam : game.homeTeam}
+                    <div className="text-sm font-medium text-gray-900 text-xl">
+                      <img src={team2Logo} className="h-32" />
                     </div>
                   </div>
                 </div>
