@@ -168,6 +168,12 @@ export const Matchup = () => {
                       style={{ textAlign: "center" }}>
                       Team 1
                     </th>
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      style={{ textAlign: "center" }}>
+                      {" "}
+                    </th>
 
                     <th
                       scope="col"
@@ -178,7 +184,10 @@ export const Matchup = () => {
                     <th
                       scope="col"
                       className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                      style={{ textAlign: "center" }}></th>
+                      style={{ textAlign: "center" }}>
+                      {" "}
+                    </th>
+
                     <th
                       scope="col"
                       className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
