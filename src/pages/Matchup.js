@@ -17,8 +17,17 @@ export const Matchup = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setTeam1(formData.firstTeam);
-    setTeam2(formData.secondTeam);
+    const formatTeam = (string) => {
+      const team = string.split(" ");
+      for (let i = 0; i < team.length; i++) {
+        team[i] = team[i][0].toUpperCase() + team[i].substr(1);
+      }
+      return team.join(" ");
+    };
+    const team1 = formatTeam(formData.firstTeam);
+    const team2 = formatTeam(formData.secondTeam);
+    setTeam1(team1);
+    setTeam2(team2);
   };
 
   useEffect(() => {
@@ -34,7 +43,7 @@ export const Matchup = () => {
     const getLogos = async () => {
       const response = await fetch("https://api.collegefootballdata.com/teams");
       const data = await response.json();
-      console.log(data);
+
       data.map((team) => {
         if (team.school === team1) {
           setTeam1Logo(team.logos[0]);
@@ -44,8 +53,6 @@ export const Matchup = () => {
           <p>No Logo Available for {team.school}</p>;
         }
       });
-      console.log(team1Logo);
-      console.log(team2Logo);
     };
     getLogos();
   }, [team1, team2]);
