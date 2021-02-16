@@ -18,7 +18,7 @@ export const Matchup = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const formatTeam = (string) => {
-      const team = string.split(" ");
+      const team = string.toLowerCase().split(" ");
       for (let i = 0; i < team.length; i++) {
         team[i] = team[i][0].toUpperCase() + team[i].substr(1);
       }
@@ -45,9 +45,9 @@ export const Matchup = () => {
       const data = await response.json();
 
       data.map((team) => {
-        if (team.school === team1) {
+        if (team.school.toLowerCase() === team1.toLowerCase()) {
           setTeam1Logo(team.logos[0]);
-        } else if (team.school === team2) {
+        } else if (team.school.toLowerCase() === team2.toLowerCase()) {
           setTeam2Logo(team.logos[0]);
         } else {
           <p>No Logo Available for {team.school}</p>;

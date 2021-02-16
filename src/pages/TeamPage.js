@@ -8,6 +8,12 @@ const TeamPage = () => {
     search: "",
   });
 
+  const getTeams = async () => {
+    const response = await fetch(`https://api.collegefootballdata.com/teams`);
+    const data = await response.json();
+    setTeams(data);
+  };
+
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
@@ -19,14 +25,47 @@ const TeamPage = () => {
     console.log(teamName);
   };
 
-  useEffect(() => {
-    const getTeams = async () => {
-      const response = await fetch(`https://api.collegefootballdata.com/teams`);
-      const data = await response.json();
-      setTeams(data);
-    };
+  // useEffect(() => {
+  //   const getTeams = async () => {
+  //     const response = await fetch(`https://api.collegefootballdata.com/teams`);
+  //     const data = await response.json();
+  //     setTeams(data);
+  //   };
+  //   getTeams();
+  // }, [teams]);
+
+  const loaded = () => {
     getTeams();
-  }, [teams]);
+    return (
+      <>
+        {teams.map((team) => {
+          if (team.school === teamName) {
+            return (
+              <div className="min-h-0 flex flex-row items-center justify-center bg-gray-50 py-4 px-4 sm:px-6 lg:px-8">
+                <div>
+                  <img
+                    src={team.logos[0]}
+                    style={{ height: "200px" }}
+                    alt="team-logo"
+                  />
+                </div>
+                <div>
+                  <p className="text-2xl font-light">
+                    <span className="font-extrabold">{team.school}</span>
+                    {team.mascot}
+                  </p>
+                  <p className="text-xl font-thin">
+                    <span className="font-bold">{team.conference}</span> (
+                    {team.division})
+                  </p>
+                </div>
+              </div>
+            );
+          }
+        })}
+      </>
+    );
+  };
 
   return (
     <div>
@@ -57,34 +96,8 @@ const TeamPage = () => {
           </form>
         </div>
       </div>
+      <div>{teamName ? loaded() : <h1>Choose Team</h1>}</div>
 
-      {teams.map((team) => {
-        if (team.school === teamName) {
-          return (
-            <div className="min-h-0 flex flex-row items-center justify-center bg-gray-50 py-4 px-4 sm:px-6 lg:px-8">
-              <div>
-                <img
-                  src={team.logos[0]}
-                  style={{ height: "200px" }}
-                  alt="team-logo"
-                />
-              </div>
-              <div>
-                <p className="text-2xl font-light">
-                  <span className="font-extrabold">{team.school}</span>
-                  {team.mascot}
-                </p>
-                <p className="text-xl font-thin">
-                  <span className="font-bold">{team.conference}</span> (
-                  {team.division})
-                </p>
-              </div>
-            </div>
-          );
-        } else {
-          return <h3>No info Available</h3>;
-        }
-      })}
       <Game team={teamName} />
     </div>
   );
