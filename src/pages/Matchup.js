@@ -58,9 +58,11 @@ export const Matchup = () => {
   }, [team1, team2]);
 
   const loaded = () => {
+    const matchupArray = matchups.games.slice().reverse();
+
     return (
       <>
-        {matchups.games.map((game) => {
+        {matchupArray.map((game) => {
           return (
             <tr>
               <td className="px-6 py-4 whitespace-nowrap">
